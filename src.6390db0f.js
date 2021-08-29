@@ -12,4 +12,4 @@ var t=arguments[3],e="Expected a function",n=NaN,r="[object Symbol]",i=/^\s+|\s+
 },{}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss");var e=t(require("./templates/markupCountryCard.hbs")),s=require("./js/refs"),o=t(require("lodash.debounce"));function t(e){return e&&e.__esModule?e:{default:e}}console.log(e.default);let n="Ukraine";const r=()=>fetch("https://restcountries.eu/rest/v2/name/Ukraine").then(console.log(n)).then(e=>e.json()).then(e=>console.log(e)).catch(e=>console.log(e)),l=r.map(e.default).join("");console.log(l);
 },{"./sass/main.scss":"clu1","./templates/markupCountryCard.hbs":"gbc9","./js/refs":"clu1","lodash.debounce":"PZFh"}]},{},["Focm"], null)
-//# sourceMappingURL=/parcel-project-template/src.6390db0f.js.map
+//# sourceMappingURL=/goit-js-hw-12-countries-new/src.6390db0f.js.map
