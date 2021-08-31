@@ -1,30 +1,41 @@
 import './sass/main.scss';
-import markupCountryCard from './templates/markupCountryCard.hbs'
-import { refs } from './js/refs'
-import debounce from 'lodash.debounce';
-console.log(markupCountryCard)
-// console.log(refs.inputSearchCountry)
-// let value = "";
-// function makeInputValue(e){
-//    value = refs.inputSearchCountry.value;
-// }
+import { alert, notice, info, success, error } from '../node_modules/@pnotify/core/dist/PNotify.js';
+import '@pnotify/core/dist/BrightTheme.css';
+import  debounce  from 'lodash.debounce';
+import  fetchCountries from './js/fetchCountries';
+import menuMrpTemplate from "./templates/markupCountryCard.hbs"
+ import refs from './js/refs'
 
+ refs.inputSearchCountry.addEventListener('input', debounce(onInputSearch, 2000))
 
-// fetch("https://restcountries.eu/rest/v2/name/Switzerland").then(response =>{
-// console.log(response)
-// return response.json()
-// }).then(result => {console.log(result)})
-// .catch(error => console.log(error))
-let value = "Ukraine"   
-  const d = () => {
-     return fetch(`https://restcountries.eu/rest/v2/name/Ukraine`)
-   .then(console.log(value)).then(r => r.json())
-   .then(s =>console.log(s))
-      .catch(error => console.log(error))
+ function onInputSearch(e) {
+  let searchQuery = e.target.value
+  refs.listPushCounries.innerHTML = ''
+  e.target.value = ''
+
+  fetchCountries(searchQuery)
+  .then(searchResults)
+  .catch(err => console.log(err))
   }
 
-      const itemGallery = d.map(markupCountryCard).join('');
-console.log(itemGallery)
-      // ListPushCounries.insertAdjacentHTML('beforeend',itemGallery );
-   
-   
+const needMoreLetters = 'Too many matches found. Please enter a more specific query.' 
+
+function searchResults(data) {
+  if (data.length >= 10) {
+      return info(needMoreLetters)
+  } else if (data.length < 10 && data.length > 1) {
+      renderCollection(data)
+  } else {
+      refs.listPushCounries.insertAdjacentHTML('beforeend', menuMrpTemplate(data))
+  }
+  
+}
+
+function createCountiesList({name}) {
+  const searchItemMarkup = `<li class="countries-item">${name}</li>`
+  refs.listPushCounries.insertAdjacentHTML('beforeend', searchItemMarkup)
+}
+
+function renderCollection(data) {
+  data.forEach(el => createCountiesList(el))
+}
