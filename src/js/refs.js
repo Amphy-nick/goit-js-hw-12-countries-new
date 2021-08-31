@@ -1,5 +1,5 @@
-// export const refs = {
-//    inputSearchCountry: document.querySelector(".search-country-js"),
-//    ListPushCounries: document.querySelector(".countries-list-js"),
+export default {
+   inputSearchCountry: document.querySelector(".search-country-js"),
+   listPushCounries: document.querySelector(".countries-list-js"),
 
-// }
+}
