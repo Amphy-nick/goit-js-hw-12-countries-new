@@ -22,7 +22,7 @@ const needMoreLetters = 'Too many matches found. Please enter a more specific qu
 
 function searchResults(data) {
   if (data.length >= 10) {
-      return info(needMoreLetters)
+      return error(needMoreLetters)
   } else if (data.length < 10 && data.length > 1) {
       renderCollection(data)
   } else {
