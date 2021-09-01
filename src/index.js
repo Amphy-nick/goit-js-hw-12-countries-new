@@ -15,7 +15,6 @@ import menuMrpTemplate from "./templates/markupCountryCard.hbs"
 
   fetchCountries(searchQuery)
   .then(searchResults)
-  .catch(err => console.log(err))
   }
 
 const needMoreLetters = 'Too many matches found. Please enter a more specific query.' 
